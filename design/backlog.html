@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>ThrooPut Backlog View</title>
+  </head>
+  <body class="bg-secondary">
+    <header class="mt-0">
+      <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
+        <a class="navbar-brand" href="index.html">ThrooPut</a>
+        <span class="navbar-brand">-</span>
+        <span class="navbar-brand font-weight-bold font-italic">Bills</span>
+        <a class="nes-btn is-disabled" href="#">Backlog</a>
+        <a class="nes-btn is-warning mr-auto" href="boardview.html">Taskboard</a>
+        <a class="nes-btn is-success mx-2" href="newtask.html">Create New Task</a>
+        <a class="nes-btn is-error mx-2" href="editboard.html">Edit Board</a>
+      </nav>
+    </header>
+    <div class="container mt-3">
+      <div class="d-flex flex-column mx-5 px-5">
+        <div class="d-flex mb-3 mt-3">
+          <div class="nes-field is-inline mr-auto">
+            <input type="text" name="search" id="search" class="nes-input">
+            <label for="search"><button class="nes-btn mx-3">Search</button></label>
+          </div>
+
+          <a class="nes-btn is-primary mx-2" href="#">Filter/Sort</a>
+        </div>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Mortgage</h5>
+          <h4 class="mx-1 bg-danger text-light rounded"><i class='fas fa-ambulance is-large p-2'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-error">2018-4-22</span>
+          </div>
+        </a>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Verizon</h5>
+          <h4 class="mx-1 bg-danger text-light rounded"><i class='fas fa-exclamation is-large p-2'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-warning">2018-05-12</span>
+          </div>
+        </a>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Cable</h5>
+          <h4 class="mx-1 bg-success text-light rounded"><i class='fas fa-angle-double-down is-large p-1'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-success">2018-05-25</span>
+          </div>
+        </a>
+        <a href="taskview.html" class="nes-btn is-disabled mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">New Laptop</h5>
+          <h4 class="mx-1 bg-primary text-light rounded"><i class='fas fa-gamepad is-large p-1'></i></h4>
+          <span class="ml-1 mr-auto">2</span>
+        </a>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Heat</h5>
+          <h4 class="mx-1 bg-dark text-warning rounded"><i class='fas fa-angle-double-up is-large p-1'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-warning">2018-05-18</span>
+          </div>
+        </a>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Electric</h5>
+          <h4 class="mx-1 bg-success text-light rounded"><i class='fas fa-angle-double-down is-large p-1'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-primary">2018-05-28</span>
+          </div>
+        </a>
+        <a href="taskview.html" class="nes-btn mb-3 text-left d-flex align-items-center">
+          <h5 class="mx-1">Student Loan</h5>
+          <h4 class="mx-1 bg-success text-light rounded"><i class='fas fa-angle-double-down is-large p-1'></i></h4>
+          <span class="ml-1 mr-auto">1</span>
+          <div class="nes-badge">
+            <span class="is-primary">2018-05-28</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

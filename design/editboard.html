@@ -8,18 +8,26 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="style.css" rel="stylesheet" />
     <meta charset="utf-8">
-    <title>ThrooPut User Options</title>
+    <title>ThrooPut Edit Board</title>
   </head>
-  <body>
+  <body class="bg-secondary">
     <header class="mt-0">
       <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
         <a class="navbar-brand" href="index.html">ThrooPut</a>
+        <span class="navbar-brand">-</span>
+        <a html="boardview.html" class="navbar-brand font-weight-bold font-italic">Bills</a>
+        <span class="navbar-brand">: Edit Board Name and User Permissions</span>
       </nav>
     </header>
-    <div class="container-fluid mt-4">
-      <div class="nes-container with-title is-rounded">
-        <h3 class="title">[User Name Here] Options</h3>
-        <div class="nav nav-pills d-flex flex-column">
+    <div class="container mt-4">
+      <div class="nes-container is-rounded bg-light">
+        <div class="nes-field">
+          <label for="board-name">Board Name</label>
+          <div class="d-flex">
+            <input type="text" id="board-name" class="nes-input mx-3" value="Bills">
+            <button class="nes-btn is-success mx-3"><i class="fas fa-check large text-dark"></i></button>
+            <button class="nes-btn is-error mx-3"><i class="nes-icon close is-small"></i></button>
+          </div>
         </div>
       </div>
     </div>
