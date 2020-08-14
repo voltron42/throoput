@@ -1,9 +1,33 @@
 html, body, pre, code, kbd, samp {
-    font-family: "Press Start 2P";
+  font-family: "Press Start 2P";
 }
 .bg-brand {
   background-color: #c0f;
 }
 header {
   border-bottom: 0.5em solid darkgray;
+}
+.bigger {
+  font-size: 1.25em;
+}
+
+.dropdown-menu.nes-container {
+  position: absolute;
+  left: auto;
+  right: 0;
+}
+
+.dropdown-link {
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.5em 1em;
+  margin: 0 1em;
+  color: #fff;
+  background-color: inherit;
+}
+
+.dropdown-link:hover {
+  color: #212529;
+  background-color: #fff;
+  text-decoration: none;
 }

@@ -5,8 +5,11 @@
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet" />
+    <script src="dropdown.js"></script>
+    <script src="modal.js"></script>
     <meta charset="utf-8">
     <title>ThrooPut Backlog View</title>
   </head>
@@ -15,13 +18,40 @@
       <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
         <a class="navbar-brand" href="index.html">ThrooPut</a>
         <span class="navbar-brand">-</span>
-        <span class="navbar-brand font-weight-bold font-italic">Bills</span>
+        <a href="boards.html" class="navbar-brand font-weight-bold font-italic">Bills</a>
         <a class="nes-btn is-disabled" href="#">Backlog</a>
-        <a class="nes-btn is-warning mr-auto" href="boardview.html">Taskboard</a>
-        <a class="nes-btn is-success mx-2" href="newtask.html">Create New Task</a>
-        <a class="nes-btn is-error mx-2" href="editboard.html">Edit Board</a>
+        <a class="nes-btn is-primary mr-auto" href="boardview.html">Taskboard</a>
+        <button class="nes-btn is-success mx-2" onclick="showModal('newTaskModal')">Create New Task</button>
+        <a class="nes-btn is-warning mx-2" href="editboard.html">Edit Board</a>
+        <div class="nav-item dropdown">
+          <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
+          <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
+            <div class="d-flex flex-column">
+              <h6 class="text-light">[Username]</h6>
+              <a class="dropdown-link" href="boards.html">My Boards</a>
+              <a class="dropdown-link" href="#">Pending Invites</a>
+              <a class="dropdown-link" href="index.html">Sign Out</a>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
+    <dialog class="nes-dialog" id="newTaskModal">
+      <form method="dialog">
+        <div class="nes-field">
+          <label for="task-name">Task Name</label>
+          <input type="text" name="task-name" id="task-name" class="nes-input">
+        </div>
+        <div class="nes-field">
+          <label for="textarea_field">Description</label>
+          <textarea id="description" class="nes-textarea"></textarea>
+        </div>
+        <menu class="dialog-menu">
+          <a class="nes-btn is-success" href="taskview.html">Create Task</a>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
     <div class="container mt-3">
       <div class="d-flex flex-column mx-5 px-5">
         <div class="d-flex mb-3 mt-3">

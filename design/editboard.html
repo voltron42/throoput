@@ -5,8 +5,11 @@
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="dropdown.js"></script>
+    <script src="modal.js"></script>
     <meta charset="utf-8">
     <title>ThrooPut Edit Board</title>
   </head>
@@ -14,9 +17,19 @@
     <header class="mt-0">
       <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
         <a class="navbar-brand" href="index.html">ThrooPut</a>
-        <span class="navbar-brand">-</span>
-        <a html="boardview.html" class="navbar-brand font-weight-bold font-italic">Bills</a>
-        <span class="navbar-brand">: Edit Board Name and User Permissions</span>
+        <a html="boardview.html" class="nav-item font-weight-bold font-italic text-light">Bills</a>
+        <span class="nav-item mr-auto text-light">: Edit Board Config</span>
+        <div class="nav-item dropdown">
+          <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
+          <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
+            <div class="d-flex flex-column">
+              <h6 class="text-light">[Username]</h6>
+              <a class="dropdown-link" href="boards.html">My Boards</a>
+              <a class="dropdown-link" href="#">Pending Invites</a>
+              <a class="dropdown-link" href="index.html">Sign Out</a>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
     <div class="container mt-4">
@@ -25,11 +38,100 @@
           <label for="board-name">Board Name</label>
           <div class="d-flex">
             <input type="text" id="board-name" class="nes-input mx-3" value="Bills">
-            <button class="nes-btn is-success mx-3"><i class="fas fa-check large text-dark"></i></button>
-            <button class="nes-btn is-error mx-3"><i class="nes-icon close is-small"></i></button>
+            <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+            <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
           </div>
         </div>
       </div>
+      <hr class="m-3 text-secondary"/>
+      <div class="nes-container with-title is-rounded bg-light">
+        <h3 class="title nes-container is-rounded">User Permissions</h3>
+        <div class="nes-field mt-2">
+          <label for="board-name">[User 0 email]</label>
+          <div class="d-flex">
+            <div class="nes-select mx-3">
+              <select required id="user-perm-0">
+                <option value="" disabled selected hidden>Select User Permissions ...</option>
+                <option value="0">Read-only</option>
+                <option value="1">User</option>
+                <option value="2">Admin</option>
+              </select>
+            </div>
+            <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+            <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+          </div>
+        </div>
+        <div class="nes-field mt-2">
+          <label for="board-name">[User 1 email]</label>
+          <div class="d-flex">
+            <div class="nes-select mx-3">
+              <select required id="user-perm-1">
+                <option value="" disabled selected hidden>Select User Permissions ...</option>
+                <option value="0">Read-only</option>
+                <option value="1">User</option>
+                <option value="2">Admin</option>
+              </select>
+            </div>
+            <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+            <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+          </div>
+        </div>
+        <div class="nes-field mt-2">
+          <label for="board-name">[User 2 email]</label>
+          <div class="d-flex">
+            <div class="nes-select mx-3">
+              <select required id="user-perm-2">
+                <option value="" disabled selected hidden>Select User Permissions ...</option>
+                <option value="0">Read-only</option>
+                <option value="1">User</option>
+                <option value="2">Admin</option>
+              </select>
+            </div>
+            <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+            <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center m-3">
+          <span class="">[User 3 email] invited</span>
+          <button class="nes-btn is-error mx-3">Cancel Invite</button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center m-3">
+          <span class="">[User 4 email] invited</span>
+          <button class="nes-btn is-error mx-3">Cancel Invite</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button class="nes-btn is-success m-3 text-center" onclick="showModal('inviteUser')">Invite User</button>
+        </div>
+      </div>
     </div>
+    <dialog class="nes-dialog" id="inviteUser">
+      <form method="dialog">
+        <h3 class="title">Invite User</h3>
+        <div class="nes-field">
+          <label for="email">User E-Mail</label>
+          <input type="email" name="email" id="email" class="nes-input"/>
+        </div>
+        <menu class="dialog-menu">
+          <button class="nes-btn is-success">Send Invite</button>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+    <dialog class="nes-dialog" id="userInvited">
+      <form method="dialog">
+        <p>[user email] has been invited to join your board.</p>
+        <menu class="dialog-menu">
+          <button class="nes-btn">OK</button>
+        </menu>
+      </form>
+    </dialog>
+    <dialog class="nes-dialog" id="inviteCancelled">
+      <form method="dialog">
+        <p>[user email] invite has been cancelled.</p>
+        <menu class="dialog-menu">
+          <button class="nes-btn">OK</button>
+        </menu>
+      </form>
+    </dialog>
   </body>
 </html>

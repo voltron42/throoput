@@ -7,6 +7,8 @@
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet" />
+    <script src="dropdown.js"></script>
+    <script src="modal.js"></script>
     <meta charset="utf-8">
     <title>ThrooPut Boards</title>
   </head>
@@ -14,9 +16,32 @@
     <header class="mt-0">
       <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
         <a class="navbar-brand mr-auto" href="index.html">ThrooPut</a>
-        <a class="nes-btn is-success" href="newboard.html">Create New Board</a>
+        <button class="nes-btn is-success" onclick="showModal('newBoardModal')">Create New Board</a>
+          <div class="nav-item dropdown">
+            <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
+            <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
+              <div class="d-flex flex-column">
+                <h6 class="text-light">[Username]</h6>
+                <a class="dropdown-link" href="boards.html">My Boards</a>
+                <a class="dropdown-link" href="#">Pending Invites</a>
+                <a class="dropdown-link" href="index.html">Sign Out</a>
+              </div>
+            </div>
+          </div>
       </nav>
     </header>
+    <dialog class="nes-dialog" id="newBoardModal">
+      <form method="dialog">
+        <div class="nes-field">
+          <label for="board-name">Board Name</label>
+          <input type="text" name="board-name" id="board-name" class="nes-input">
+        </div>
+        <menu class="dialog-menu">
+          <a class="nes-btn is-success" href="backlog.html">Create board</a>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
     <div class="container-fluid mt-4">
       <div class="nes-container with-title is-rounded">
         <h4 class="title">Boards for [User Name Here]</h4>
