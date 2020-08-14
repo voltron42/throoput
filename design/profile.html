@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
+    <link href="util/style.css" rel="stylesheet" />
+    <script src="util/dropdown.js"></script>
+    <script src="util/modal.js"></script>
+    <meta charset="utf-8">
+    <title>ThrooPut Boards</title>
+  </head>
+  <body class="bg-secondary">
+    <header class="mt-0">
+      <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
+        <a class="navbar-brand" href="index.html">ThrooPut</a>
+        <span class="nav-item mr-auto text-light">[User Name Here]</span>
+        <div class="nav-item dropdown">
+          <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
+          <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
+            <div class="d-flex flex-column">
+              <h6 class="text-light">[Username]</h6>
+              <a class="dropdown-link" href="profile.html">My Profile</a>
+              <a class="dropdown-link" href="boards.html">My Boards</a>
+              <a class="dropdown-link" href="index.html">Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-4">
+      <div class="nes-container is-rounded bg-light">
+        <h3>[user e-mail]</h3>
+        <button class="nes-btn is-error" onclick="showModal('confirmDelete')">Delete Account</button>
+      </div>
+      <div class="nes-container is-rounded bg-light mt-4">
+        <h3>Received Invites</h3>
+        <table class="table table-borderless table-striped text-center">
+          <thead>
+            <tr>
+              <th class="align-middle">Board</th>
+              <th class="align-middle">Admin</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="align-middle">[board 0]</td>
+              <td class="align-middle">[admin 0]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">[board 1]</td>
+              <td class="align-middle">[admin 1]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">[board 2]</td>
+              <td class="align-middle">[admin 2]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="nes-container is-rounded bg-light mt-4">
+        <h3>Sent Invites</h3>
+        <table class="table table-borderless table-striped text-center">
+          <thead>
+            <tr>
+              <th class="align-middle">Board</th>
+              <th class="align-middle">User</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="align-middle">[board 0]</td>
+              <td class="align-middle">[user 0]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">[board 1]</td>
+              <td class="align-middle">[user 1]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle">[board 2]</td>
+              <td class="align-middle">[user 2]</td>
+              <td class="align-middle">
+                <button class="nes-btn is-success mx-3 bigger"><i class="fas fa-check bigger"></i></button>
+                <button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <dialog class="nes-dialog" id="confirmDelete">
+      <form method="dialog">
+        <h3 class="title">Delete Account</h3>
+        <p>Are you certain you want to delete your account?</p>
+        <menu class="dialog-menu">
+          <button class="nes-btn is-primary">Confirm</button>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+  </body>
+</html>
