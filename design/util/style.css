@@ -31,3 +31,15 @@ header {
   background-color: #fff;
   text-decoration: none;
 }
+
+.task-properties th {
+  text-align: right;
+}
+
+.task-properties th, .task-properties td {
+  padding: 0.5em;
+}
+
+.hide {
+  display: none;
+}
