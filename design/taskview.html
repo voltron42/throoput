@@ -5,11 +5,25 @@
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link href="util/style.css" rel="stylesheet" />
     <script src="util/dropdown.js"></script>
     <script src="util/class.js"></script>
     <script src="util/modal.js"></script>
+    <script src="util/tabs.js"></script>
+    <script type="text/javascript">
+      let editTabMap = {
+        "viewBtn":"viewTask",
+        "editBtn":"editTask"
+      };
+      function validate(input) {
+        console.log(input);
+      }
+      function selectPane(selector) {
+        console.log(selector);
+      }
+    </script>
     <meta charset="utf-8">
     <title>ThrooPut Task View</title>
   </head>
@@ -35,59 +49,238 @@
       </nav>
     </header>
     <div class="container mt-4">
-      <div class="nes-container is-rounded bg-light mb-4">
-        <h5>Description:</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus velit, volutpat eget justo ac, pretium faucibus eros. Sed placerat nibh orci, quis porta elit faucibus eget.</p>
-        <table class="task-properties">
-          <tbody>
-            <tr>
-              <th>Estimate:</th>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th>Due Date:</th>
-              <td>2020/10/12</td>
-            </tr>
-            <tr>
-              <th>Lead time:</th>
-              <td>10 days</td>
-            </tr>
-            <tr>
-              <th>Recurrence:</th>
-              <td>Every third Monday, Wednesday, Friday</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="nes-container with-title is-rounded bg-light mb-4">
+        <div class="title">
+          <button id="viewBtn" class="nes-btn is-disabled" onclick="selectTab(editTabMap,'viewBtn','is-disabled','is-warning')">View Task</button>
+          <button id="editBtn" class="nes-btn is-warning" onclick="selectTab(editTabMap,'editBtn','is-disabled','is-warning')">Edit Task</button>
+          <button class="nes-btn is-error" onclick="showModal('deleteTask')">Delete Task</button>
+        </div>
+        <div id="viewTask" class="">
+          <h5>Description:</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus velit, volutpat eget justo ac, pretium faucibus eros. Sed placerat nibh orci, quis porta elit faucibus eget.</p>
+          <table class="task-properties">
+            <tbody>
+              <tr>
+                <th>Estimate:</th>
+                <td>2</td>
+              </tr>
+              <tr>
+                <th>Due Date:</th>
+                <td>2020/10/12</td>
+              </tr>
+              <tr>
+                <th>Lead time:</th>
+                <td>10 days</td>
+              </tr>
+              <tr>
+                <th>Recurrence:</th>
+                <td>Every third Monday, Wednesday, Friday</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="editTask" class="hide">
+          <div class="nes-field m-4">
+            <label for="taskName">Task Name</label>
+            <input type="text" id="taskName" class="nes-input">
+          </div>
+          <div class="nes-field m-4">
+            <label for="description">Description</label>
+            <textarea id="description" class="nes-textarea"></textarea>
+          </div>
+          <div class="nes-field is-inline m-4">
+            <label for="estimate">Estimate</label>
+            <input type="number" id="estimate" class="nes-input">
+          </div>
+          <div class="nes-field is-inline m-4">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" class="nes-input" onchange="validate(this)">
+          </div>
+          <div class="nes-container with-title is-rounded m-4" id="leadTime">
+            <h4 class="title nes-container is-rounded">Lead Time</h4>
+            <div class="nes-field is-inline m-4">
+              <label for="leadTimeValue">Lead&nbsp;Time&nbsp;Count</label>
+              <input type="number" id="leadTimeValue" class="nes-input">
+            </div>
+            <div class="nes-field is-inline m-4">
+              <label for="leadTimeUnits">Lead&nbsp;Time&nbsp;Units</label>
+              <div class="nes-select">
+                <select id="leadTimeUnits">
+                  <option value="" disabled selected hidden>Select...</option>
+                  <option value="days">Days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="nes-container with-title is-rounded m-4 px-0" id="recurrences">
+            <h4 class="title nes-container is-rounded">Recurrences</h4>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>Every {N} weeks on {subset of days of week}.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>Every {subset of days of month} of every {Nth} month.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of every {Nth} month.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>Every {subset of weeks of month} {subset of days of week} of every {Nth} month}.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>Every {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
+                </tr>
+                <tr>
+                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                  <td><span>Every {subset of weeks of month} {subset of days of week} of each {subset of months of year} of every {Nth} year.</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="nes-btn is-success mx-4" onclick="showModal('addRecurrence')">Add Recurrence</button>
+          </div>
+        </div>
       </div>
-      <div class="d-flex justify-content-between mt-2 mb-4">
-        <button class="nes-btn is-primary">Edit Task</button>
-        <button class="nes-btn is-primary">History</button>
-        <button class="nes-btn is-error">Delete Task</button>
+      <dialog class="nes-dialog" id="deleteTask">
+        <form method="dialog">
+          <h2>Delete Task [task name]?</h2>
+          <h4>This Cannot Be Undone!</h4>
+          <menu class="dialog-menu">
+            <a class="nes-btn is-error" href="boardview.html">Confirm</a>
+            <button class="nes-btn">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
+      <dialog class="nes-dialog" id="addRecurrence">
+        <form method="dialog">
+          <div class="nes-select">
+            <select required id="recurrenceType" onchange="selectPane(this)">
+              <option value="" disabled selected hidden>Select...</option>
+              <option value="weekly">Weekly</option>
+              <option value="daysOfMonth">Day(s) of Month</option>
+              <option value="adjacentWeekdayOfMonth">Adjacent weekday(s) of Month</option>
+              <option value="weeksOfMonth">Week(s) of Month</option>
+              <option value="daysOfMonthOfYear">Day of Month of Year</option>
+              <option value="adjacentWeekdayOfMonthOfYear">Adjacent weekday(s) of Month of Year</option>
+              <option value="weeksOfMonthOfYear">Week(s) of Month of Year</option>
+            </select>
+          </div>
+          <div class="d-flex">
+            <span id="recurrenceOut"></span>
+          </div>
+          <div id="weekly" class="">
+            <div class="d-flex flex-column">
+              <div class="d-flex">
+                <span>Every&nbsp;</span>
+                <input type="text" id="taskName" class="nes-input"/>
+                <span>&nbsp;weeks&nbsp;on:&nbsp;</span>
+              </div>
+            </div>
+            <div class="nes-field m-4">
+              <label for="taskName">Every <input type="text" id="taskName" class="nes-input"/> weeks on: </label>
+            </div>
+          </div>
+          <div id="daysOfMonth" class="hide">
+          </div>
+          <div id="adjacentWeekdayOfMonth" class="hide">
+          </div>
+          <div id="weeksOfMonth" class="hide">
+          </div>
+          <div id="daysOfMonthOfYear" class="hide">
+          </div>
+          <div id="adjacentWeekdayOfMonthOfYear" class="hide">
+          </div>
+          <div id="weeksOfMonthOfYear" class="hide">
+          </div>
+          <menu class="dialog-menu">
+            <button class="nes-btn is-success">Add Recurrence</button>
+            <button class="nes-btn">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
+      <div id="notes-expand" class="m-4">
+        <button class="nes-btn is-warning" onclick="toggleClass('hide',['notes-expand','notes'])">Notes&nbsp;<i class='fas fa-caret-down'></i></button>
       </div>
-      <button id="notes-expand" class="nes-btn is-warning hide" onclick="toggleClass('hide',['notes-expand','notes'])">Notes&nbsp;<i class='fas fa-caret-down'></i></button>
-      <div id="notes" class="nes-container with-title is-rounded bg-light">
+      <div id="notes" class="nes-container with-title is-rounded bg-light m-4 hide">
         <span class="title"><button class="nes-btn is-warning" onclick="toggleClass('hide',['notes-expand','notes'])">Notes&nbsp;<i class='fas fa-caret-up'></i></button></span>
         <div class="nes-balloon from-right">
           <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
         </div>
-        <div class="d-flex justify-content-end">
-          <div class="d-flex flex-column">
+        <div class="d-flex justify-content-end mb-4">
+          <div class="d-flex align-items-end flex-column nes-container is-rounded bg-brand text-light p-1 ">
             <span>[User&nbsp;Name]</span>
-            <div class="nes-badge"><span class="is-primary">2020/02/17</span></div>
+            <span>[yyyy/mm/dd hr:mi:ss.sss]</span>
           </div>
         </div>
         <div class="nes-balloon from-left">
           <p>Thou hast had a good afternoon.</p>
         </div>
-        <div class="d-flex justify-content-start">
-          <div class="d-flex flex-column">
+        <div class="d-flex justify-content-start mb-4">
+          <div class="d-flex flex-column nes-container is-rounded bg-brand text-light p-1">
             <span>[User&nbsp;Name]</span>
-            <div class="nes-badge"><span class="is-primary">2020/02/18</span></div>
+            <span>[yyyy/mm/dd hr:mi:ss.sss]</span>
           </div>
         </div>
-        <button class="nes-btn is-success m-4">Add Note</button>
+        <button class="nes-btn is-success m-4" onclick="showModal('addNote')">Add Note</button>
+      </div>
+      <dialog class="nes-dialog" id="addNote">
+        <form method="dialog">
+          <div class="nes-field">
+            <label for="newNote"><h3>Add Note to Task [task name]</h3></label>
+            <textarea id="newNote" class="nes-textarea"></textarea>
+          </div>
+          <menu class="dialog-menu">
+            <a class="nes-btn is-success" href="taskview.html">Save</a>
+            <button class="nes-btn">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
+      <div id="history-expand" class="m-4 hide">
+        <button class="nes-btn is-warning" onclick="toggleClass('hide',['history-expand','history'])">History&nbsp;<i class='fas fa-caret-down'></i></button>
+      </div>
+      <div id="history" class="nes-container with-title is-rounded bg-light m-4 px-0">
+        <span class="title mx-4"><button class="nes-btn is-warning" onclick="toggleClass('hide',['history-expand','history'])">History&nbsp;<i class='fas fa-caret-up'></i></button></span>
+        <table class="table history-table table-striped">
+          <tbody>
+            <tr>
+              <th>Created</th>
+              <td>[yyyy/mm/dd hr:mi:ss.sss]</td>
+              <td>[user name]</td>
+            </tr>
+            <tr>
+              <th>To [step]</th>
+              <td>[yyyy/mm/dd hr:mi:ss.sss]</td>
+              <td>[user name]</td>
+            </tr>
+            <tr>
+              <th>To [step]</th>
+              <td>[yyyy/mm/dd hr:mi:ss.sss]</td>
+              <td>[user name]</td>
+            </tr>
+            <tr>
+              <th>To [step]</th>
+              <td>[yyyy/mm/dd hr:mi:ss.sss]</td>
+              <td>[user name]</td>
+            </tr>
+            <tr>
+              <th>To [step]</th>
+              <td>[yyyy/mm/dd hr:mi:ss.sss]</td>
+              <td>[user name]</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
   </body>
 </html>

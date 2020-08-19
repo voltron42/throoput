@@ -43,3 +43,34 @@ header {
 .hide {
   display: none;
 }
+
+.history-table.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.history-table.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ecf;
+}
+
+.history-table.table-striped tbody td {
+  vertical-align: middle;
+}
+
+.history-table th {
+  text-align: right;
+}
+
+.table td, .table th {
+  border: 0;
+}
+
+#addRecurrence input.nes-input {
+  display: inline;
+  width: 5em;
+  padding: 0.25em;
+  text-align: center;
+}
+
+#addRecurrence #daysOfMonth tr {
+  
+}

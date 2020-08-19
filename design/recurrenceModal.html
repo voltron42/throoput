@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="util/style.css" rel="stylesheet" />
+    <script src="util/dropdown.js"></script>
+    <script src="util/class.js"></script>
+    <script src="util/modal.js"></script>
+    <script src="util/tabs.js"></script>
+    <script type="text/javascript">
+      let editTabMap = {
+        "viewBtn":"viewTask",
+        "editBtn":"editTask"
+      };
+      function validate(input) {
+        console.log(input);
+      }
+      function selectPane(selector) {
+        console.log(selector);
+      }
+    </script>
+    <meta charset="utf-8">
+    <title>Recurrence</title>
+  </head>
+  <body>
+    <button class="nes-btn is-success mx-4" onclick="showModal('addRecurrence')">Add Recurrence</button>
+    <dialog class="nes-dialog" id="addRecurrence">
+      <form method="dialog">
+        <div class="nes-select">
+          <select required id="recurrenceType" onchange="selectPane(this)">
+            <option value="" disabled selected hidden>Select...</option>
+            <option value="weekly">Weekly</option>
+            <option value="daysOfMonth">Day(s) of Month</option>
+            <option value="adjacentWeekdayOfMonth">Adjacent weekday(s) of Month</option>
+            <option value="weeksOfMonth">Week(s) of Month</option>
+            <option value="daysOfMonthOfYear">Day of Month of Year</option>
+            <option value="adjacentWeekdayOfMonthOfYear">Adjacent weekday(s) of Month of Year</option>
+            <option value="weeksOfMonthOfYear">Week(s) of Month of Year</option>
+          </select>
+        </div>
+        <div class="d-flex m-4">
+          <span id="recurrenceOut"></span>
+        </div>
+        <div id="weekly" class="hide">
+          <table>
+            <tr>
+              <td colspan="2">
+                <div class="d-flex align-items-center">
+                  <span>Every&nbsp;</span>
+                  <input type="text" id="taskName" class="nes-input"/>
+                  <span>&nbsp;weeks&nbsp;on:&nbsp;</span>
+                </div>
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" class="nes-checkbox" id="weeklySunday"/>
+                  <span>Sunday</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklyMonday"/>
+                  <span>Monday</span>
+                </label>
+              </td>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklyTuesday"/>
+                  <span>Tuesday</span>
+                </label>
+              </td>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklyWednesday"/>
+                  <span>Wednesday</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklyThursday"/>
+                  <span>Thursday</span>
+                </label>
+              </td>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklyFriday"/>
+                  <span>Friday</span>
+                </label>
+              </td>
+              <td>
+                <label class="flex-fill p-2">
+                  <input type="checkbox" class="nes-checkbox" id="weeklySaturday"/>
+                  <span>Saturday</span>
+                </label>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="daysOfMonth" class="">
+          <div class="d-flex align-items-center m-3">
+            <span>Every&nbsp;</span>
+            <input type="text" id="taskName" class="nes-input"/>
+            <span>&nbsp;months&nbsp;on:&nbsp;</span>
+          </div>
+          <table class="table is-bordered">
+            <tbody>
+              <tr>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly1"/><span>1</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly2"/><span>2</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly3"/><span>3</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly4"/><span>4</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly5"/><span>5</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly6"/><span>6</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly7"/><span>7</span></label></td>
+              </tr>
+              <tr>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly8"/><span>8</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly9"/><span>9</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly10"/><span>10</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly11"/><span>11</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly12"/><span>12</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly13"/><span>13</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly14"/><span>14</span></label></td>
+              </tr>
+              <tr>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly15"/><span>15</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly16"/><span>16</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly17"/><span>17</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly18"/><span>18</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly19"/><span>19</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly20"/><span>20</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly21"/><span>21</span></label></td>
+              </tr>
+              <tr>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly22"/><span>22</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly23"/><span>23</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly24"/><span>24</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly25"/><span>25</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly26"/><span>26</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly27"/><span>27</span></label></td>
+                <td><label><input type="checkbox" class="nes-checkbox" id="monthly28"/><span>28</span></label></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col">
+              <label><input type="checkbox" class="nes-checkbox" id="monthlyLastDay"/><span>The Last Day</span></label>
+            </div>
+          </div>
+        </div>
+        <div id="adjacentWeekdayOfMonth" class="hide">
+        </div>
+        <div id="weeksOfMonth" class="hide">
+        </div>
+        <div id="daysOfMonthOfYear" class="hide">
+        </div>
+        <div id="adjacentWeekdayOfMonthOfYear" class="hide">
+        </div>
+        <div id="weeksOfMonthOfYear" class="hide">
+        </div>
+        <menu class="dialog-menu">
+          <button class="nes-btn is-success">Add Recurrence</button>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+  </body>
+</html>
