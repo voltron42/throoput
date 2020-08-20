@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" />
+    <script src="dnd.js"></script>
+    <meta charset="utf-8">
+    <title>Drag &amp; Drop Taskboard Demo</title>
+  </head>
+  <body class="bg-secondary">
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <div id="todo-container" class="col nes-container with-title is-rounded bg-danger p-1 m-3 drop-target">
+          <h4 class="title nes-container is-rounded">TODO</h4>
+          <div id="todo-column" class="d-flex flex-column">
+            <a id="payBills" href="#" draggable="true" class="nes-btn m-3 draggable">Pay Bills</a>
+            <a id="dishes" href="#" draggable="true" class="nes-btn m-3 draggable">Dishes</a>
+            <a id="laundry" href="#" draggable="true" class="nes-btn m-3 draggable">Laundry</a>
+            <a id="mow" href="#" draggable="true" class="nes-btn m-3 draggable">Mow Lawn</a>
+            <a id="garbage" href="#" draggable="true" class="nes-btn m-3 draggable">Take Out Garbage</a>
+          </div>
+        </div>
+        <div id="doing-container" class="col nes-container with-title is-rounded bg-success p-1 m-3 drop-target">
+          <h4 class="title nes-container is-rounded">Doing</h4>
+          <div id="doing-column" class="d-flex flex-column">
+            <div class="nes-btn is-disabled m-3 dummy">&nbsp;</div>
+          </div>
+        </div>
+        <div id="done-container" class="col nes-container with-title is-rounded bg-primary p-1 m-3 drop-target">
+          <h4 class="title nes-container is-rounded">Done</h4>
+          <div id="done-column" class="d-flex flex-column">
+            <div class="nes-btn is-disabled m-3 dummy">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

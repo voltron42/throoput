@@ -2,7 +2,7 @@
 
 ## Weekly
 
-> "Every {N} weeks on {subset of days of week}"
+> "Every {N} weeks on {subset of days of week}."
 
 * 'n-weeks' : number
 * 'subset of days of week': {weekday names}

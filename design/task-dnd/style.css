@@ -1,0 +1,11 @@
+.dummy {
+  display: none;
+}
+
+.over .dummy {
+  display: block;
+}
+
+[draggable] {
+  user-select: none;
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE throoput [
+<!ELEMENT throoput (users,boards,board-steps,tasks,notes,board-users)>
+<!ELEMENT users (user*)>
+<!ELEMENT user EMPTY>
+<!ATTLIST user
+  id ID #REQUIRED
+  username CDATA #REQUIRED
+  email CDATA #REQUIRED
+  password CDATA #REQUIRED
+>
+<!ELEMENT boards (board*)>
+<!ELEMENT board EMPTY>
+<!ATTLIST board
+  id ID #REQUIRED
+  board-name CDATA #REQUIRED
+  owner IDREF #REQUIRED
+>
+<!ELEMENT board-steps (board-step*)>
+<!ELEMENT board-step EMPTY>
+<!ATTLIST board-step
+  id ID #REQUIRED
+  board IDREF #REQUIRED
+  step-name CDATA #REQUIRED
+  order CDATA #REQUIRED
+>
+<!ELEMENT tasks (task*)>
+<!ELEMENT task EMPTY>
+<!ATTLIST task
+  id ID #REQUIRED
+  board IDREF #REQUIRED
+  author IDREF #REQUIRED
+  timestamp CDATA #REQUIRED
+  task-name CDATA #REQUIRED
+  description CDATA #REQUIRED
+  estimate (1|2|3|5|8|13|22) #REQUIRED
+  priority (emergency|urgent|major|minor|mundane)
+  due-date CDATA #IMPLIED
+  lead-time-value CDATA #IMPLIED
+  lead-time-units (days|weeks|months|years) #IMPLIED
+>
+<!ELEMENT task-steps (task-step*)>
+<!ELEMENT task-step EMPTY>
+<!ATTLIST task-step
+  id ID #REQUIRED
+  task IDREF #REQUIRED
+  step IDREF #REQUIRED
+  user IDREF #REQUIRED
+  timestamp CDATA #REQUIRED
+>
+<!ELEMENT notes (note*)>
+<!ELEMENT note EMPTY>
+<!ATTLIST note
+  id ID #REQUIRED
+  task IDREF #REQUIRED
+  author IDREF #REQUIRED
+  timestamp CDATA #REQUIRED
+  body CDATA #REQUIRED
+>
+<!ELEMENT board-users (board-user*)>
+<!ELEMENT board-user EMPTY>
+<!ATTLIST board-user
+  id ID #REQUIRED
+  board IDREF #REQUIRED
+  user IDREF #REQUIRED
+  permissions (read-only|user|admin) #REQUIRED
+>
+]>
+<throoput>
+</throoput>

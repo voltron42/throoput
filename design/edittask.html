@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="util/style.css" rel="stylesheet" />
+    <script src="util/dropdown.js"></script>
+    <script src="util/class.js"></script>
+    <script src="util/modal.js"></script>
+    <script src="util/tabs.js"></script>
+    <script type="text/javascript">
+      let editTabMap = {
+        "viewBtn":"viewTask",
+        "editBtn":"editTask"
+      };
+      function validate(input) {
+        console.log(input);
+      }
+      function selectPane(selector) {
+        console.log(selector);
+      }
+    </script>
+    <meta charset="utf-8">
+    <title>Throoput - Edit Task</title>
+  </head>
+  <body class="bg-secondary">
+    <header class="mt-0">
+      <nav class="navbar navbar-expand-sm bg-brand navbar-dark mt-0">
+        <a class="navbar-brand" href="index.html">ThrooPut</a>
+        <span class="nav-item text-light">-&nbsp;</span>
+        <a html="boardview.html" class="nav-item font-weight-bold font-italic text-light">Bills</a>
+        <span class="nav-item text-light">&nbsp;-&nbsp;</span>
+        <span class="nav-item text-light mr-auto">[Task Name]</span>
+        <button class="nes-btn is-error mx-2" onclick="showModal('deleteTask')">Delete Task</button>
+        <div class="nav-item dropdown">
+          <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
+          <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
+            <div class="d-flex flex-column">
+              <h6 class="text-light">[Username]</h6>
+              <a class="dropdown-link" href="profile.html">My Profile</a>
+              <a class="dropdown-link" href="boards.html">My Boards</a>
+              <a class="dropdown-link" href="index.html">Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-4">
+      <div class="nes-container is-rounded bg-light mb-4">
+        <div class="nes-field m-4">
+          <label for="taskName">Task Name</label>
+          <input type="text" id="taskName" class="nes-input">
+        </div>
+        <div class="nes-field m-4">
+          <label for="description">Description</label>
+          <textarea id="description" class="nes-textarea"></textarea>
+        </div>
+        <div class="row">
+          <div class="col nes-field m-4">
+            <label for="estimate">Estimate</label>
+            <input type="number" id="estimate" class="nes-input">
+          </div>
+          <div class="col nes-field m-4">
+            <label for="priority">Priority</label>
+            <div class="nes-select">
+              <select id="priority">
+                <option value="" disabled selected hidden>Select...</option>
+                <option value="6">+&nbsp;Emergency</option>
+                <!-- 5 is "Overdue" (date dependent) -->
+                <option value="4">!&nbsp;Urgent</option>
+                <!-- 3 is "Due" (within "lead time" of "due date") -->
+                <option value="2">^&nbsp;Major</option>
+                <option value="1">=&nbsp;Minor</option>
+                <option value="0">...&nbsp;Mundane</option>
+              </select>
+            </div>
+          </div>
+          <div class="col nes-field m-4">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" class="nes-input" onchange="validate(this)">
+          </div>
+        </div>
+        <div class="nes-container with-title is-rounded m-4" id="leadTime">
+          <h4 class="title nes-container is-rounded">Lead Time</h4>
+          <div class="row">
+            <div class="col nes-field m-4">
+              <label for="leadTimeValue">Lead&nbsp;Time&nbsp;Count</label>
+              <input type="number" id="leadTimeValue" class="nes-input">
+            </div>
+            <div class="col nes-field m-4">
+              <label for="leadTimeUnits">Lead&nbsp;Time&nbsp;Units</label>
+              <div class="nes-select">
+                <select id="leadTimeUnits">
+                  <option value="" disabled selected hidden>Select...</option>
+                  <option value="days">Days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nes-container with-title is-rounded m-4 px-0" id="recurrences">
+          <h4 class="title nes-container is-rounded">Recurrences</h4>
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>Every {N} weeks on {subset of days of week}.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>Every {subset of days of month} of every {Nth} month.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of every {Nth} month.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>Every {subset of weeks of month} {subset of days of week} of every {Nth} month}.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>Every {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
+              </tr>
+              <tr>
+                <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
+                <td><span>Every {subset of weeks of month} {subset of days of week} of each {subset of months of year} of every {Nth} year.</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="nes-btn is-success mx-4" onclick="showModal('addRecurrence')">Add Recurrence</button>
+        </div>
+      </div>
+    </div>
+    <dialog class="nes-dialog" id="deleteTask">
+      <form method="dialog">
+        <h2>Delete Task [task name]?</h2>
+        <h4>This Cannot Be Undone!</h4>
+        <menu class="dialog-menu">
+          <a class="nes-btn is-error" href="boardview.html">Confirm</a>
+          <button class="nes-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+  </body>
+</html>

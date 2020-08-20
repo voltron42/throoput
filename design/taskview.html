@@ -35,6 +35,7 @@
         <a html="boardview.html" class="nav-item font-weight-bold font-italic text-light">Bills</a>
         <span class="nav-item text-light">&nbsp;-&nbsp;</span>
         <span class="nav-item text-light mr-auto">[Task Name]</span>
+        <a class="nes-btn is-warning mx-2" href="editview.html">Edit Task</a>
         <div class="nav-item dropdown">
           <button class="nes-btn is-primary d-flex" onclick="toggleDropdown('userDropdown')"><i class='fas fa-user-alt'></i><i class='fas fa-caret-down'></i></button>
           <div class="dropdown-menu nes-container is-rounded is-dark" id="userDropdown">
@@ -49,166 +50,45 @@
       </nav>
     </header>
     <div class="container mt-4">
-      <div class="nes-container with-title is-rounded bg-light mb-4">
-        <div class="title">
-          <button id="viewBtn" class="nes-btn is-disabled" onclick="selectTab(editTabMap,'viewBtn','is-disabled','is-warning')">View Task</button>
-          <button id="editBtn" class="nes-btn is-warning" onclick="selectTab(editTabMap,'editBtn','is-disabled','is-warning')">Edit Task</button>
-          <button class="nes-btn is-error" onclick="showModal('deleteTask')">Delete Task</button>
-        </div>
-        <div id="viewTask" class="">
-          <h5>Description:</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus velit, volutpat eget justo ac, pretium faucibus eros. Sed placerat nibh orci, quis porta elit faucibus eget.</p>
-          <table class="task-properties">
-            <tbody>
-              <tr>
-                <th>Estimate:</th>
-                <td>2</td>
-              </tr>
-              <tr>
-                <th>Due Date:</th>
-                <td>2020/10/12</td>
-              </tr>
-              <tr>
-                <th>Lead time:</th>
-                <td>10 days</td>
-              </tr>
-              <tr>
-                <th>Recurrence:</th>
-                <td>Every third Monday, Wednesday, Friday</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div id="editTask" class="hide">
-          <div class="nes-field m-4">
-            <label for="taskName">Task Name</label>
-            <input type="text" id="taskName" class="nes-input">
-          </div>
-          <div class="nes-field m-4">
-            <label for="description">Description</label>
-            <textarea id="description" class="nes-textarea"></textarea>
-          </div>
-          <div class="nes-field is-inline m-4">
-            <label for="estimate">Estimate</label>
-            <input type="number" id="estimate" class="nes-input">
-          </div>
-          <div class="nes-field is-inline m-4">
-            <label for="dueDate">Due Date</label>
-            <input type="date" id="dueDate" class="nes-input" onchange="validate(this)">
-          </div>
-          <div class="nes-container with-title is-rounded m-4" id="leadTime">
-            <h4 class="title nes-container is-rounded">Lead Time</h4>
-            <div class="nes-field is-inline m-4">
-              <label for="leadTimeValue">Lead&nbsp;Time&nbsp;Count</label>
-              <input type="number" id="leadTimeValue" class="nes-input">
-            </div>
-            <div class="nes-field is-inline m-4">
-              <label for="leadTimeUnits">Lead&nbsp;Time&nbsp;Units</label>
-              <div class="nes-select">
-                <select id="leadTimeUnits">
-                  <option value="" disabled selected hidden>Select...</option>
-                  <option value="days">Days</option>
-                  <option value="weeks">Weeks</option>
-                  <option value="months">Months</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="nes-container with-title is-rounded m-4 px-0" id="recurrences">
-            <h4 class="title nes-container is-rounded">Recurrences</h4>
-            <table class="table table-striped">
-              <tbody>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>Every {N} weeks on {subset of days of week}.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>Every {subset of days of month} of every {Nth} month.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of every {Nth} month.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>Every {subset of weeks of month} {subset of days of week} of every {Nth} month}.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>Every {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>{'First weekday on or after' | 'Last weekday on or before'} the {subset of days of month} of each {subset of months of year} of every {Nth} year.</span></td>
-                </tr>
-                <tr>
-                  <td><button class="nes-btn is-error mx-3 bigger"><i class="fas fa-close bigger"></i></button></td>
-                  <td><span>Every {subset of weeks of month} {subset of days of week} of each {subset of months of year} of every {Nth} year.</span></td>
-                </tr>
-              </tbody>
-            </table>
-            <button class="nes-btn is-success mx-4" onclick="showModal('addRecurrence')">Add Recurrence</button>
-          </div>
+      <div class="nes-container is-rounded bg-light mb-4">
+        <h5>Description:</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus velit, volutpat eget justo ac, pretium faucibus eros. Sed placerat nibh orci, quis porta elit faucibus eget.</p>
+        <table class="task-properties">
+          <tbody>
+            <tr>
+              <th>Estimate:</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th>Priority:</th>
+              <td class="d-flex align-items-center">
+                <span class="mx-2 bg-danger text-light rounded">
+                  <i class='fas fa-exclamation is-large p-2'></i>
+                </span>
+                <span class="mx-2">Urgent</span>
+              </td>
+            </tr>
+            <tr>
+              <th>Due Date:</th>
+              <td>
+                <div class="nes-badge">
+                  <span class="is-primary">2020-10-22</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Lead time:</th>
+              <td>10 days</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5 class="mt-3">Recurrences</h5>
+        <div class="lists">
+          <ul class="nes-list is-disc">
+            <li>Every 3 weeks on Monday, Wednesday, &amp; Friday.</li>
+          </ul>
         </div>
       </div>
-      <dialog class="nes-dialog" id="deleteTask">
-        <form method="dialog">
-          <h2>Delete Task [task name]?</h2>
-          <h4>This Cannot Be Undone!</h4>
-          <menu class="dialog-menu">
-            <a class="nes-btn is-error" href="boardview.html">Confirm</a>
-            <button class="nes-btn">Cancel</button>
-          </menu>
-        </form>
-      </dialog>
-      <dialog class="nes-dialog" id="addRecurrence">
-        <form method="dialog">
-          <div class="nes-select">
-            <select required id="recurrenceType" onchange="selectPane(this)">
-              <option value="" disabled selected hidden>Select...</option>
-              <option value="weekly">Weekly</option>
-              <option value="daysOfMonth">Day(s) of Month</option>
-              <option value="adjacentWeekdayOfMonth">Adjacent weekday(s) of Month</option>
-              <option value="weeksOfMonth">Week(s) of Month</option>
-              <option value="daysOfMonthOfYear">Day of Month of Year</option>
-              <option value="adjacentWeekdayOfMonthOfYear">Adjacent weekday(s) of Month of Year</option>
-              <option value="weeksOfMonthOfYear">Week(s) of Month of Year</option>
-            </select>
-          </div>
-          <div class="d-flex">
-            <span id="recurrenceOut"></span>
-          </div>
-          <div id="weekly" class="">
-            <div class="d-flex flex-column">
-              <div class="d-flex">
-                <span>Every&nbsp;</span>
-                <input type="text" id="taskName" class="nes-input"/>
-                <span>&nbsp;weeks&nbsp;on:&nbsp;</span>
-              </div>
-            </div>
-            <div class="nes-field m-4">
-              <label for="taskName">Every <input type="text" id="taskName" class="nes-input"/> weeks on: </label>
-            </div>
-          </div>
-          <div id="daysOfMonth" class="hide">
-          </div>
-          <div id="adjacentWeekdayOfMonth" class="hide">
-          </div>
-          <div id="weeksOfMonth" class="hide">
-          </div>
-          <div id="daysOfMonthOfYear" class="hide">
-          </div>
-          <div id="adjacentWeekdayOfMonthOfYear" class="hide">
-          </div>
-          <div id="weeksOfMonthOfYear" class="hide">
-          </div>
-          <menu class="dialog-menu">
-            <button class="nes-btn is-success">Add Recurrence</button>
-            <button class="nes-btn">Cancel</button>
-          </menu>
-        </form>
-      </dialog>
       <div id="notes-expand" class="m-4">
         <button class="nes-btn is-warning" onclick="toggleClass('hide',['notes-expand','notes'])">Notes&nbsp;<i class='fas fa-caret-down'></i></button>
       </div>
