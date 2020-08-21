@@ -3,10 +3,12 @@ insert into users (username,email,password) values (?,?,?);
 
 -- verify user availability
 select count(*)
+from users
 where username = ?;
 
 -- verify email availability
 select count(*)
+from users
 where email = ?;
 
 -- sign_in
@@ -23,6 +25,9 @@ where owner = ?;
 
 -- Create new board
 insert into boards (board_name, owner) values (?,?);
+
+-- list roles
+select * from roles order by perm;
 
 --list member boards
 select b.board_id, b.board_name, r.role_name, r.order
@@ -59,8 +64,15 @@ delete from invited_users
   where board = ? and user = ?;
 
 --remove user from board
-delete from board_users
-  where board = ? and user = ?;
+select min(role_id) from roles;
+update from board_users
+  set role = ? - 1;
+
+--list board steps
+select step_name, step_order
+from board_steps
+where board = ?
+order by step_order;
 
 --list backlog
 select task_id, task_name, estimate, priority, due_date, lead_time_value, lead_time_units
@@ -84,8 +96,10 @@ on (s.board = b.board
 and s.step = b.order)
 where t.board = ?;
 
---list task
+--get task
 select * from tasks where task_id = ?;
+
+--get task history
 select b.step_name, b.order, u.username, t.transition_time
 from task_steps t
 inner join board_steps b
@@ -95,6 +109,8 @@ inner join users u
 on u.user_id = t.user
 where task = ?
 order by t.transition_time;
+
+--get task notes
 select n.body, n.created, u.username
 from task_notes n
 inner join users u
@@ -112,13 +128,13 @@ insert into task_steps (task, board, step, user)
    where task = ?);
 
 --create task
-insert into task
+insert into tasks
   (task_name, board, author, description, estimate, priority, due_date, lead_time_value, lead_time_units, recurrence)
   values
   (?,?,?,?,?,?,?,?,?,?);
 
 --edit task
-update task
+update tasks
   set (task_name = ?,
        description = ?,
        estimate = ?,
@@ -129,4 +145,53 @@ update task
        recurrence = ?)
   where task_id = ?;
 
---
+--delete task
+delete from tasks where task_id = ?;
+delete from task_steps where task = ?;
+delete from task_notes where task = ?;
+
+--delete board
+delete from task_notes
+  where task in (select task_id
+    from tasks where board = ?);
+delete from task_steps where board = ?;
+delete from tasks where board = ?;
+delete from invited_users where board = ?;
+delete from board_users where board = ?;
+delete from board_steps where board = ?;
+delete from boards where board_id = ?;
+
+-- delete user
+delete from task_notes
+  where task in (select t.task_id
+    from tasks t
+    inner join boards b
+    on t.board = b.board_id
+    where b.owner = ?);
+delete from task_steps
+  where task in (select t.task_id
+    from tasks t
+    inner join boards b
+    on t.board = b.board_id
+    where b.owner = ?);
+delete from tasks
+  where board in (select board_id
+  from boards where owner = ?);
+delete from invited_users where user = ?;
+delete from board_steps
+  where board in (select board_id
+  from boards where owner = ?);
+delete from boards where owner = ?;
+
+select min(role_id) from roles;
+update from board_users
+    set role = ? - 1
+    where user = ?;
+
+insert into deleted_users (user) values (?);
+--do NOT delete users from user table, just
+
+-- reinstate user
+delete from deleted_users where user = ?;
+
+-- stats: ?

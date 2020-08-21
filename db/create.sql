@@ -101,3 +101,12 @@ CREATE TABLE task_notes (
   FOREIGN KEY (author) REFERENCES users(user_id),
   INDEX (task)
 );
+
+-- new tables
+
+CREATE TABLE deleted_users (
+  user int NOT NULL,
+  deleted timestamp NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (user),
+  FOREIGN KEY (user) REFERENCES users(user_id)
+)
